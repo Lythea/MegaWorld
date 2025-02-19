@@ -1,0 +1,5 @@
+import Header from "@/app/user/components/header/page";
+import Form from "@/app/user/components/homepage/herosection";
+import AboutUs from "@/app/user/components//homepage/aboutus";
+import Featured from "@/app/user/components//homepage/featured";
+import Footer from "@/app/user/components//footer/footer";
