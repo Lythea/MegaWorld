@@ -10,23 +10,15 @@ import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store'; // Adjust path as needed
 import { addProject, removeProject, updateProject } from '@/app/redux/slice/townshipData';
-
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
-
 
 const TownshipParent = () => {
 
  const dispatch = useDispatch();
-   const projects = useSelector((state: RootState) => state.projects.projects);
-  const townships = useSelector((state: RootState) => state.projects.townships);
-  const images = useSelector((state: RootState) => state.projects.images);
+const projects = useSelector((state: RootState) => state.townshipParentData.projects);
+const townships = useSelector((state: RootState) => state.townshipParentData.townships);
+const images = useSelector((state: RootState) => state.townshipParentData.images);
 
-  useEffect(() => {
-    // Log all data when the component mounts or state changes
-    console.log("Projects: ", projects);
-    console.log("Townships: ", townships);
-    console.log("Images: ", images);
-  }, [projects, townships, images]);
   return (
     <>
 <div className="relative w-full h-screen overflow-hidden">

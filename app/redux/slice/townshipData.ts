@@ -1,4 +1,4 @@
-// src/redux/slices/projectsSlice.ts
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Define the state type for each category
@@ -66,7 +66,7 @@ const initialState: ProjectsState = {
 };
 
 // Create the slice
-const projectsSlice = createSlice({
+const townshipSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {
@@ -117,8 +117,6 @@ const projectsSlice = createSlice({
     },
   },
 });
-
-// Export actions
 export const { 
   addProject, 
   removeProject, 
@@ -129,7 +127,7 @@ export const {
   addImage, 
   removeImage, 
   updateImage 
-} = projectsSlice.actions;
+} = townshipSlice.actions;
 
 // Export reducer to add to store
-export default projectsSlice.reducer;
+export default townshipSlice.reducer; // Fix this line
