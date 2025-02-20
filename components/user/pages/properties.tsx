@@ -1,10 +1,7 @@
 "use client";
 import { useState } from "react";
-import { Montserrat, Cardo } from "next/font/google";
+import { montserrat,cardo} from "@/utils/fonts";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["100", "300", "500"] });
-const cardo = Cardo({ subsets: ["latin"], weight: ["400", "700"] });
 
 const PropertyList = () => {
   const [search, setSearch] = useState("");
@@ -104,94 +101,94 @@ const PropertyList = () => {
   });
 
   return (
-    <div className="mx-auto px-6 py-16 bg-[#F9FAF1] w-full">
-   <h2 className={`text-xl sm:text-md text-center text-black mb-2 tracking-widest uppercase ${cardo.className}`}>
-  Explore Your Next Home
-</h2>
-  <p className={`text-sm sm:text-md text-center text-black mb-2 tracking-widest uppercase ${montserrat.className}`}>
-  Find the perfect place that suits your lifestyle. 
-</p>
- 
+   <div className="mx-auto px-4 sm:px-6 py-16 bg-[#F9FAF1] max-w-7xl w-full">
+  {/* Title Section */}
+  <h2 className={`text-lg sm:text-xl text-center text-black mb-2 tracking-widest uppercase ${cardo.className}`}>
+    Explore Your Next Home
+  </h2>
+  <p className={`text-sm sm:text-md text-center text-black mb-6 tracking-widest uppercase ${montserrat.className}`}>
+    Find the perfect place that suits your lifestyle.
+  </p>
 
+  {/* Filters & Search Bar */}
+  <div className="flex flex-wrap gap-4 justify-between items-center w-full mb-6 mt-6">
+    {/* Left Side: Title & Search Input */}
+    <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+      <h2 className="text-lg sm:text-xl font-semibold text-gray-700">PROPERTIES</h2>
+      <input
+        type="text"
+        placeholder="Search by name or location..."
+        className="px-4 py-2 w-full sm:w-60 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#B8986E] transition"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+    </div>
 
-    <div className="flex justify-between items-center w-full gap-4 mb-6 mt-10">
-  {/* Left Side: Title & Search Input */}
-  <div className="flex items-center gap-4">
-    <h2 className="text-xl font-semibold text-gray-700">PROPERTIES</h2>
-    <input
-      type="text"
-      placeholder="Search by name or location..."
-      className="px-4 py-2 w-60 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#B8986E] transition"
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
-    />
+    {/* Right Side: Dropdown Filters */}
+    <div className="flex flex-wrap gap-4 w-full sm:w-auto">
+      <select
+        className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#B8986E] transition w-full sm:w-auto"
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+      >
+        <option value="">Sort By</option>
+        <option value="name-asc">Name (A-Z)</option>
+        <option value="name-desc">Name (Z-A)</option>
+        <option value="location-asc">Location (A-Z)</option>
+        <option value="location-desc">Location (Z-A)</option>
+        <option value="price-asc">Price (Low to High)</option>
+        <option value="price-desc">Price (High to Low)</option>
+      </select>
+
+      <select
+        className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#B8986E] transition w-full sm:w-auto"
+        value={locationFilter}
+        onChange={(e) => setLocationFilter(e.target.value)}
+      >
+        <option value="">All Locations</option>
+        {uniqueLocations.map((location, index) => (
+          <option key={index} value={location}>
+            {location}
+          </option>
+        ))}
+      </select>
+
+      <select
+        className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#B8986E] transition w-full sm:w-auto"
+        value={priceRange}
+        onChange={(e) => setPriceRange(e.target.value)}
+      >
+        {priceRanges.map((range, index) => (
+          <option key={index} value={range.value}>
+            {range.label}
+          </option>
+        ))}
+      </select>
+    </div>
   </div>
 
-  {/* Right Side: Select Dropdowns */}
-  <div className="flex gap-4">
-    <select
-      className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#B8986E] transition"
-      value={sortBy}
-      onChange={(e) => setSortBy(e.target.value)}
-    >
-      <option value="">Sort By</option>
-      <option value="name-asc">Name (A-Z)</option>
-      <option value="name-desc">Name (Z-A)</option>
-      <option value="location-asc">Location (A-Z)</option>
-      <option value="location-desc">Location (Z-A)</option>
-      <option value="price-asc">Price (Low to High)</option>
-      <option value="price-desc">Price (High to Low)</option>
-    </select>
-
-    <select
-      className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#B8986E] transition"
-      value={locationFilter}
-      onChange={(e) => setLocationFilter(e.target.value)}
-    >
-      <option value="">All Locations</option>
-      {uniqueLocations.map((location, index) => (
-        <option key={index} value={location}>
-          {location}
-        </option>
-      ))}
-    </select>
-
-    <select
-      className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#B8986E] transition"
-      value={priceRange}
-      onChange={(e) => setPriceRange(e.target.value)}
-    >
-      {priceRanges.map((range, index) => (
-        <option key={index} value={range.value}>
-          {range.label}
-        </option>
-      ))}
-    </select>
+  {/* Properties Grid */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+    {sortedProperties.length > 0 ? (
+      sortedProperties.map((property, index) => (
+        <Card key={index} className="rounded-xl shadow-lg border border-gray-200 hover:shadow-2xl transition duration-300">
+          <CardHeader>
+            <img src={property.image} alt={property.name} className="w-full h-56 object-cover" />
+          </CardHeader>
+          <CardContent className="text-center">
+            <CardTitle className="text-lg font-bold text-black">{property.name}</CardTitle>
+            <p className="text-gray-700">{property.location}</p>
+            <p className="text-[#B8986E] font-semibold">₱{property.price.toLocaleString()} / month</p>
+            <p className="text-[#B8986E] font-semibold">{property.details.toLocaleString()} / month</p>
+          </CardContent>
+        </Card>
+      ))
+    ) : (
+      <p className="text-center text-gray-700 text-lg col-span-full">No properties found.</p>
+    )}
   </div>
 </div>
 
-
- 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-        {sortedProperties.length > 0 ? (
-          sortedProperties.map((property, index) => (
-            <Card key={index} className="p-2 rounded-xl shadow-lg border border-gray-200 hover:shadow-2xl transition duration-300">
-              <CardHeader>
-                <img src={property.image} alt={property.name} className="w-full h-64 object-cover rounded-lg" />
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardTitle className="text-lg font-bold text-black">{property.name}</CardTitle>
-                <p className="text-gray-700">{property.location}</p>
-                <p className="text-[#B8986E] font-semibold">₱{property.price.toLocaleString()} / month</p>
-                 <p className="text-[#B8986E] font-semibold">{property.details.toLocaleString()} / month</p>
-              </CardContent>
-            </Card>
-          ))
-        ) : (
-          <p className="text-center text-gray-700 text-lg col-span-full">No properties found.</p>
-        )}
-      </div>
-    </div>
   );
 };
 

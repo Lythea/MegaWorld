@@ -5,18 +5,18 @@ import { useState, useEffect, useRef } from "react"; // Import useRef
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Montserrat } from "next/font/google";
+import { montserrat } from "@/utils/fonts";
 
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["900", "600", "700"] });
+
 
 const navItems = [
-  { title: "TOWNSHIPS", href: "/user/township", submenu: ["Metro Manila", "Luzon", "Visayas", "Mindanao", "Watch Videos", "Talk of the Townships"] },
-  { title: "RESIDENCES", href: "/residences", submenu: ["New Projects", "Pre-selling", "Ready for Occupancy", "Payment Channels"] },
-  { title: "HOTELS", href: "/hotels", submenu: ["Belmont Hotels", "Richmonde Hotels", "Savoy Hotels", "Other homegrown brands", "Club Access"] },
-  { title: "LIFESTYLE MALLS", href: "/malls", submenu: ["Lifestyle Malls", "Community Malls", "Up and coming"] },
-  { title: "PREMIUM OFFICES", href: "/offices", submenu: ["Corporate Towers", "Business Centers", "Shared Spaces"] },
-  { title: "CUSTOM SERVICES", href: "/services", submenu: ["Contact Us", "Company", "Corporate Governance", "Company Disclosures", "Investor Relations", "Awards", "Careers"] },
-  { title: "VISIT OUR SHOWROOM", href: "/showroom", submenu: ["Schedule a Visit", "Virtual Tour"] },
+  { title: "TOWNSHIPS", href: "/user/township", submenu: ["Metro Manila", "Luzon", "Visayas", "Mindanao", "Watch Videos"] },
+  { title: "RESIDENCES", href: "/user/residence", submenu: ["New Project", "Pre-selling", "Ready for Occupancy", "Payment Channels"] },
+  { title: "HOTELS", href: "/user/hotel", submenu: ["Belmont Hotel", "Richmonde Hotel", "Savoy Hotel", "Other homegrown brand", "Club Access"] },
+  { title: "LIFESTYLE MALLS", href: "/user/mall", submenu: ["Lifestyle Mall", "Community Mall", "Up and coming"] },
+  { title: "PREMIUM OFFICES", href: "/user/office", submenu: ["Corporate Tower", "Business Center", "Shared Space"] },
+  { title: "CUSTOM SERVICES", href: "/user/service", submenu: ["Contact Us", "Company", "Corporate Governance", "Company Disclosures", "Investor Relations", "Awards", "Careers"] },
+  { title: "VISIT OUR SHOWROOM", href: "/user/showroom", submenu: ["Schedule a Visit", "Virtual Tour"] },
 ];
 
 export default function Header() {
@@ -135,7 +135,7 @@ function NavLink({ href, children, active, onClick }: { href: string; children: 
   return (
     <Link
       href={href}
-      className={`px-4 py-2  transition-colors duration-300 text-sm text-black ${
+      className={`px-4 py-2  transition-colors duration-300 text-sm text-white ${
         active ? "text-[#B8986E]" : "text-white"
       } hover:text-[#B8986E]`}
       onClick={onClick}

@@ -1,48 +1,15 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/app/redux/store'; // Adjust path as needed
 
-const residences = [
-  {
-    title: "Uptown Arts Residence",
-    location: "Makati City",
-    description:
-      "Location is everything for Uptown Arts Residence, the latest residential condominium gem to rise within Uptown Bonifacio—Fort Bonifacio’s center for nightlife and entertainment.",
-    buttonText: "Discover Uptown",
-  },
-  {
-    title: "Skyline Premier Suites",
-    location: "Batangas City",
-    description:
-      "Experience luxury living with breathtaking city views at Skyline Premier Suites, offering world-class amenities and a vibrant community.",
-    buttonText: "Explore More",
-  },
-  {
-    title: "Harbor Bay Towers",
-    location: "Davao City",
-    description:
-      "Wake up to stunning ocean views at Harbor Bay Towers, a premium seaside condominium designed for those who seek peace and exclusivity.",
-    buttonText: "See Availability",
-  },
-  {
-    title: "The Green Haven",
-    location: "Laguna",
-    description:
-      "A nature-inspired sanctuary in the heart of the city, The Green Haven offers sustainable living spaces with lush greenery and eco-friendly amenities.",
-    buttonText: "Learn More",
-  },
-  {
-    title: "Metro Heights Residences",
-    location: "Mandaluyong City",
-    description:
-      "Modern and stylish high-rise living at Metro Heights Residences, located in the city's most dynamic business and lifestyle district.",
-    buttonText: "Schedule a Visit",
-  },
-];
 
 const Form: React.FC = () => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [showMinDropdown, setShowMinDropdown] = useState(false);
   const [showMaxDropdown, setShowMaxDropdown] = useState(false);
+ const dispatch = useDispatch();
+   const residences = useSelector((state: RootState) => state.heroParentData.residences);
 
   const priceSuggestions = [
     "1,000,000",
@@ -154,6 +121,19 @@ const Form: React.FC = () => {
               onChange={(e) => setMaxPrice(formatPrice(e.target.value))}
               className="w-full pl-8 p-4 bg-white/90 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-[#B8986E] focus:outline-none transition"
             />
+                {showMaxDropdown && (
+              <ul className="absolute w-full bg-white border border-gray-300 rounded-lg shadow-md mt-1 z-10">
+                {priceSuggestions.map((price, index) => (
+                  <li
+                    key={index}
+                    className="p-3 hover:bg-gray-100 cursor-pointer"
+                    onMouseDown={() => setMaxPrice(`${price}`)}
+                  >
+                    {price}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
 

@@ -1,25 +1,31 @@
-// app/user/township/[slug]/page.tsx
 "use client";
-import Township from "@/components/user/pages/township"; // Import the Township component
+
+
+import { useParams,useSearchParams } from "next/navigation"; // Import useParams
+import TownshipChild from "@/components/user/pages/township/townshipChild";
+import TownshipVideos from "@/components/user/pages/township/townshipVideos"; // Import TownshipVideos
 import Header from "@/components/user/components/header/page";
 import Footer from "@/components/user/components/footer/footer";
 
-interface TownshipSlugPageProps {
-  params: {
-    slug: string; // Capture the dynamic parameter (slug)
-  };
-}
 
-export default function TownshipSlugPage({ params }: TownshipSlugPageProps) {
-  const { slug } = params; // Extract the slug from params
+export default function TownshipSlugPage() {
+  const params = useParams(); // Unwrap params
+  const slug = params?.slug as string; // Ensure slug is properly accessed
 
-  console.log("Slug:", slug); // Log the slug to the console for debugging
+  // const searchParams = useSearchParams();
+  // const projects = JSON.parse(searchParams.get("data") || "[]");
 
+
+  // console.log("Township Data:", projects);
   return (
     <>
       <Header />
       <div className="mx-auto px-6 py-16 bg-[#F9FAF1] w-full">
-        <Township township={slug} /> {/* Pass the slug as a prop */}
+        {slug === "watch-videos" ? (
+          <TownshipVideos /> // Render TownshipVideos when slug is "watch-videos"
+        ) : (
+          <TownshipChild township={slug} /> // Otherwise, render TownshipChild
+        )}
       </div>
       <Footer />
     </>

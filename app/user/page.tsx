@@ -1,11 +1,16 @@
 "use client";
+
 import Header from "@/components/user/components/header/page";
 import Form from "@/components/user/components/homepage/herosection";
 import AboutUs from "@/components/user/components/homepage/aboutus";
 import Featured from "@/components/user/components/homepage/featured";
 import Footer from "@/components/user/components/footer/footer"; // ✅ Only importing Footer
+import { Provider } from 'react-redux'; // Import Provider
+import store from "@/app/redux/store"; // Default import for store
+
 
 export default function Home() {
+
   return (
     <>
       <Header />
@@ -18,8 +23,10 @@ export default function Home() {
     muted
     playsInline
   />
-
+<Provider store={store}>
   <Form />
+</Provider>
+
   </div>
   <AboutUs />
 

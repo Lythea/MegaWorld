@@ -1,9 +1,7 @@
-import { Montserrat, Cardo } from "next/font/google";
+import { montserrat,cardo } from "@/utils/fonts";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["100", "300", "500"] });
-const cardo = Cardo({ subsets: ["latin"], weight: ["400", "700"] });
 
 const FeaturedProjects = () => {
   const projects = [
@@ -81,14 +79,17 @@ const FeaturedProjects = () => {
       </div>
 
       {/* View More Button */}
-      <div className="flex justify-center mt-8 sm:mt-10">
-        <Link href="/user/properties">
-          <Button className="px-6 sm:px-8 py-3 sm:py-5 text-lg sm:text-xl bg-[#B8986E] text-white rounded-lg hover:bg-[#9D7A50] transition">
-            View More
-          </Button>
-        </Link>
-        
-      </div>
+<div className="flex justify-center mt-8 sm:mt-10">
+  <Link href="/user/properties">
+   <Button
+  className={`px-6 sm:px-6 py-3 sm:py-5 text-lg sm:text-xl !bg-white !text-[#B8986E] !border-[#B8986E] border-2 rounded-lg transition-all duration-300 transform hover:scale-105 ${montserrat.className}`}
+>
+  View More
+</Button>
+
+  </Link>
+</div>
+
     </div>
   );
 };
