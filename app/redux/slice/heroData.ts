@@ -9,11 +9,11 @@ interface Residence {
 }
 
 interface HeroDataState {
-  residences: Residence[];
+  properties: Residence[];
 }
 
 const initialState: HeroDataState = {
-  residences: [
+  properties: [
     {
       title: "Uptown Arts Residence",
       location: "Makati City",
@@ -43,10 +43,10 @@ const initialState: HeroDataState = {
       buttonText: "Learn More",
     },
     {
-      title: "Metro Heights Residences",
+      title: "Metro Heights Properties",
       location: "Mandaluyong City",
       description:
-        "Modern and stylish high-rise living at Metro Heights Residences, located in the city's most dynamic business and lifestyle district.",
+        "Modern and stylish high-rise living at Metro Heights Properties, located in the city's most dynamic business and lifestyle district.",
       buttonText: "Schedule a Visit",
     },
   ],
@@ -56,10 +56,10 @@ const heroDataSlice = createSlice({
   name: 'heroData',
   initialState,
   reducers: {
-    // Example action to modify the residences (optional, in case you need to update data)
+    // Example action to modify the properties (optional, in case you need to update data)
     updateResidence(state, action: PayloadAction<{ index: number; updatedData: Residence }>) {
       const { index, updatedData } = action.payload;
-      state.residences[index] = updatedData;
+      state.properties[index] = updatedData;
     },
   },
 });

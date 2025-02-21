@@ -3,19 +3,18 @@ import { useEffect, useState } from "react";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store'; // Adjust path as needed
- 
-interface ResidenceProps {
-  residence?: string;
+
+interface OfficeProps {
+  office?: string;
 }
 
-const Residence = ({ residence }: ResidenceProps) => {
+const Office = ({ office }: OfficeProps) => {
   const [search, setSearch] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
   const [divisionFilter, setDivisionFilter] = useState("");
-  const [typeFilter, setTypeFilter] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const properties = useSelector((state: RootState) => state.residenceData.properties);
+  const offices = useSelector((state: RootState) => state.officeData.offices);
   
   useEffect(() => {
     setLoading(true);
@@ -23,34 +22,30 @@ const Residence = ({ residence }: ResidenceProps) => {
       setLoading(false);
     }, 500);
     return () => clearTimeout(timer);
-  }, [search, locationFilter, divisionFilter, typeFilter]);
+  }, [search, locationFilter, divisionFilter]);
 
   useEffect(() => {
-    if (residence) {
-      if (residence === "new-project") {
-        residence = "New";
-      }
-      setDivisionFilter(residence);
+    if (office) {
+  
+      setDivisionFilter(office);
     }
-  }, [residence]);
+  }, [office]);
 
-  const uniqueLocations = [...new Set(properties.map((item) => item.location))];
-  const uniqueDivisions = [...new Set(properties.map((item) => item.division))];
+  const uniqueLocations = [...new Set(offices.map((item) => item.location))];
+  const uniqueDivisions = [...new Set(offices.map((item) => item.division))];
 
-  const filteredProperties = properties.filter((property) => {
-    const matchesSearch = `${property.name} ${property.location}`
+  const filteredOffices = offices.filter((office) => {
+    const matchesSearch = `${office.name} ${office.location}`
       .toLowerCase()
       .includes(search.toLowerCase());
 
     const matchesLocation =
-      !locationFilter || locationFilter.toLowerCase() === "all" || property.location.toLowerCase() === locationFilter.toLowerCase();
+      !locationFilter || locationFilter.toLowerCase() === "all" || office.location.toLowerCase() === locationFilter.toLowerCase();
 
-const matchesDivision =
-  !divisionFilter ||
-  divisionFilter.toLowerCase().replace(/-/g, " ").trim() === "all" ||
-  (divisionFilter.toLowerCase().replace(/-/g, " ").trim() === "new" &&
-    (property.division.toLowerCase().trim() === "new" || property.division.toLowerCase().trim() === "new project")) ||
-  divisionFilter.toLowerCase().replace(/-/g, " ").trim() === property.division.toLowerCase().replace(/-/g, " ").trim();
+    const matchesDivision =
+      !divisionFilter ||
+      divisionFilter.toLowerCase().replace(/-/g, " ").trim() === "all" ||
+      divisionFilter.toLowerCase().replace(/-/g, " ").trim() === office.division.toLowerCase().replace(/-/g, " ").trim();
 
     return matchesSearch && matchesLocation && matchesDivision;
   });
@@ -58,15 +53,15 @@ const matchesDivision =
   return (
     <div className="mx-auto px-6 py-16 bg-[#F9FAF1] w-full sm:w-[90%] md:w-[80%] lg:w-[70%]">
       <h2 className="text-xl sm:text-lg md:text-xl text-center text-black mb-2 tracking-widest uppercase">
-        Discover Premier Properties
+        Discover Premier Office Spaces
       </h2>
       <p className="text-sm sm:text-base md:text-md text-center text-black mb-2 tracking-widest uppercase">
-        Find the perfect residence that fits your lifestyle and business needs.
+        Find the ideal office space tailored for your business.
       </p>
 
       <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-4 mb-6 mt-10">
         <div className="flex items-center gap-4 w-full sm:w-auto">
-          <h2 className="text-xl font-semibold text-gray-700">PROPERTIES</h2>
+          <h2 className="text-xl font-semibold text-gray-700">OFFICES</h2>
           <input
             type="text"
             placeholder="Search by name or location..."
@@ -110,33 +105,33 @@ const matchesDivision =
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-          {filteredProperties.length > 0 ? (
-            filteredProperties.map((residence, index) => {
+          {filteredOffices.length > 0 ? (
+            filteredOffices.map((office, index) => {
               const divisionColors: Record<string, string> = {
-                "New": "bg-blue-500",
-                "Ready for Occupancy": "bg-green-500",
-                "Pre-Selling": "bg-yellow-500",
-                "Under Construction":"bg-red-500",
+                "For Lease": "bg-red-500",
+                "For Sale": "bg-green-500",
+                "For Rent": "bg-blue-500",
+                
               };
-              const badgeColor = divisionColors[residence.division] || "bg-gray-500";
+              const badgeColor = divisionColors[office.division] || "bg-gray-500";
               return (
                 <Card key={index} className="relative p-2 rounded-xl shadow-lg border border-gray-200 hover:shadow-2xl transition duration-300">
                   <CardHeader className="p-0 relative">
                     <span className={`absolute top-3 right-3 text-white text-xs font-semibold px-3 py-1 rounded-md shadow-md ${badgeColor}`}>
-                      {residence.division}
+                      {office.division}
                     </span>
-                    <img src={residence.image} alt={residence.name} className="w-full h-64 object-cover rounded-lg p-4" />
+                    <img src={office.image} alt={office.name} className="w-full h-64 object-cover rounded-lg p-4" />
                   </CardHeader>
                   <CardContent className="text-center">
-                    <CardTitle className="text-lg font-bold text-black">{residence.name}</CardTitle>
+                    <CardTitle className="text-lg font-bold text-black">{office.name}</CardTitle>
                     <hr className="my-2 border-gray-300" />
-                    <p className="text-gray-700">{residence.location}</p>
+                    <p className="text-gray-700">{office.location}</p>
                   </CardContent>
                 </Card>
               );
             })
           ) : (
-            <p className="text-center text-gray-700 text-lg col-span-full">No properties found.</p>
+            <p className="text-center text-gray-700 text-lg col-span-full">No offices found.</p>
           )}
         </div>
       )}
@@ -144,4 +139,4 @@ const matchesDivision =
   );
 };
 
-export default Residence;
+export default Office;

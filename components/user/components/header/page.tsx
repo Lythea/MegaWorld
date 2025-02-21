@@ -10,16 +10,15 @@ import { montserrat } from "@/utils/fonts";
 
 
 const navItems = [
-  { title: "TOWNSHIPS", href: "/user/township", submenu: ["Metro Manila", "Luzon", "Visayas", "Mindanao", "Watch Videos"] },
-  { title: "RESIDENCES", href: "/user/residence", submenu: ["New Project", "Pre-selling", "Ready for Occupancy", "Payment Channels"] },
-  { title: "HOTELS", href: "/user/hotel", submenu: ["Belmont Hotel", "Richmonde Hotel", "Savoy Hotel", "Other homegrown brand", "Club Access"] },
-  { title: "LIFESTYLE MALLS", href: "/user/mall", submenu: ["Lifestyle Mall", "Community Mall", "Up and coming"] },
-  { title: "PREMIUM OFFICES", href: "/user/office", submenu: ["Corporate Tower", "Business Center", "Shared Space"] },
-  { title: "CUSTOM SERVICES", href: "/user/service", submenu: ["Contact Us", "Company", "Corporate Governance", "Company Disclosures", "Investor Relations", "Awards", "Careers"] },
+  { title: "WHAT'S NEW", href: "/user/", submenu: ["Testimonial", "Seminars", "Meeting", "Events","Closed Deals","Real Estate News","Real Estate Tips","On-Going Infrastructure", "Watch Videos"] },
+  { title: "PROPERTIES", href: "/user/residence", submenu: ["New Project", "Pre-selling", "Ready for Occupancy", "Payment Channels"] },
+  { title: "OFFICES", href: "/user/office", submenu: ["For Lease","For Rent","For Sale"] },
+  { title: "AGENT", href: "/user/agent", submenu: [] },
+  { title: "CUSTOM SERVICES", href: "/user/service", submenu: ["Contact Us", "Company", "Awards", "Careers","Privacy Policy"] },
   { title: "VISIT OUR SHOWROOM", href: "/user/showroom", submenu: ["Schedule a Visit", "Virtual Tour"] },
 ];
 
-export default function Header() {
+export default function Header() {  
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);

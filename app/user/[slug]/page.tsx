@@ -2,9 +2,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Properties from "@/components/user/pages/properties";
-import Township from "@/components/user/pages/township/townshipChild";
 import Header from "@/components/user/components/header/page";
 import Footer from "@/components/user/components/footer/footer";
+import WatchVideos from "@/components/user/pages/user/watchVideos"
+
+import { Provider } from 'react-redux'; // Import Provider
+import store from "@/app/redux/store"; // Default import for store
 
 export default function DynamicUserPage() {
   const [slug, setSlug] = useState<string | null>(null);
@@ -32,7 +35,10 @@ export default function DynamicUserPage() {
       <div className="mx-auto px-6 py-16 bg-[#F9FAF1] w-full">
         {slug === "properties" ? (
           <Properties />
-        ) : slug ? (
+          ) : slug === "watch-videos" ? (
+             <Provider store={store}>  <WatchVideos />  </Provider>
+    
+    ): slug ? (
           <p className="text-center text-gray-700 text-lg">
             Page Not Found or Under Development
           </p>

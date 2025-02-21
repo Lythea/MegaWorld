@@ -1,11 +1,20 @@
 // src/redux/store.ts
 import { configureStore } from '@reduxjs/toolkit';
-import townshipParentData from '@/app/redux/slice/townshipData';
+
 import heroParentData from '@/app/redux/slice/heroData';
+import featuredData from '@/app/redux/slice/featuredProperty';
+import townshipVideoData from '@/app/redux/slice/whatsNewVideos';
+import residenceData from '@/app/redux/slice/residenceData'
+import officeData from '@/app/redux/slice/officeData'
+
 const store = configureStore({
   reducer: {
-    townshipParentData: townshipParentData,
+    officeData:officeData,
+    townshipVideo: townshipVideoData,
     heroParentData: heroParentData,
+    featuredData: featuredData,
+    residenceData: residenceData, 
+
   },
 });
 

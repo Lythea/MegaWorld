@@ -5,3 +5,17 @@ import Form from "@/components/user/components/homepage/herosection";
 import AboutUs from "@/components/user/components/homepage/aboutus";
 import Featured from "@/components/user/components/homepage/featured";
 import Footer from "@/components/user/components/footer/footer"; // ✅ Only importing Footer
+
+
+----------------------- REDUX COMPONENTS --------------------
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/app/redux/store'; // Adjust path as needed
+
+// Encapsulate your page 
+import { Provider } from 'react-redux'; // Import Provider
+import store from "@/app/redux/store"; // Default import for store
+
+
+      <Provider store={store}>
+        <TownshipParent /> - Sample Page
+      </Provider>

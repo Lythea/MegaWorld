@@ -9,7 +9,7 @@ const Form: React.FC = () => {
   const [showMinDropdown, setShowMinDropdown] = useState(false);
   const [showMaxDropdown, setShowMaxDropdown] = useState(false);
  const dispatch = useDispatch();
-   const residences = useSelector((state: RootState) => state.heroParentData.residences);
+   const properties = useSelector((state: RootState) => state.heroParentData.properties);
 
   const priceSuggestions = [
     "1,000,000",
@@ -23,7 +23,7 @@ const Form: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % residences.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % properties.length);
     }, 5000);
 
     return () => clearInterval(interval);
@@ -39,16 +39,16 @@ const Form: React.FC = () => {
 <div className=" flex items-center justify-center w-full sm:w-7/12 min-h-[450px] sm:min-h-[500px] text-center sm:text-end p-6 sm:p-12 sm:bg-black/50 rounded-lg shadow-lg transition-opacity duration-500 ease-in-out">
   <div>
     <h1 className="text-3xl sm:text-5xl font-extrabold text-neutral-100">
-      {residences[currentIndex].title}
+      {properties[currentIndex].title}
     </h1>
     <h3 className="text-lg sm:text-xl font-extrabold text-neutral-100">
-      at {residences[currentIndex].location}
+      at {properties[currentIndex].location}
     </h3>
     <p className="mt-4 text-neutral-100 text-md sm:text-lg">
-      {residences[currentIndex].description}
+      {properties[currentIndex].description}
     </p>
     <button className="mt-6 px-4 sm:px-6 py-3 bg-white text-black font-bold rounded-lg shadow-md hover:bg-gray-200 transition-all duration-300">
-      {residences[currentIndex].buttonText}
+      {properties[currentIndex].buttonText}
     </button>
   </div>
 </div>
