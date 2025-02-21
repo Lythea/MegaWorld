@@ -17,7 +17,7 @@ export default function OfficeSlugPage() {
       
       <div className="mx-auto px-6 py-16 bg-[#F9FAF1] w-full">
       <Provider store={store}>
-          <OfficeChild residence={slug} />
+          <OfficeChild office={slug} />
       </Provider>
       </div>
       <Footer />
